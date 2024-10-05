@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated Status Indicator Panel</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f2f5;
+        }
+        .panel {
+            display: flex;
+            background: #fff;
+            padding: 20px 40px;
+            border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            align-items: center;
+        }
+        .indicator {
+            display: flex;
+            align-items: center;
+            margin-right: 30px;
+            transition: all 0.3s ease;
+        }
+        .indicator span {
+            font-size: 1.2rem;
+            color: #333;
+        }
+        .light {
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            margin-left: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+        .light.red {
+            background-color: #ff4d4f;
+        }
+        .light.green {
+            background-color: #52c41a;
+        }
+    </style>
+</head>
+<body>
+    <div class="panel">
+        <div class="indicator">
+            <span>CMP1</span>
+            <div class="light red" id="cmp1"></div>
+        </div>
+        <div class="indicator">
+            <span>CMP2</span>
+            <div class="light red" id="cmp2"></div>
+        </div>
+        <div class="indicator">
+            <span>CMP3</span>
+            <div class="light green" id="cmp3"></div>
+        </div>
+        <div class="indicator">
+            <span>CMP4</span>
+            <div class="light red" id="cmp4"></div>
+        </div>
+    </div>
+    <script>
+        const indicators = [
+            document.getElementById('cmp1'),
+            document.getElementById('cmp2'),
+            document.getElementById('cmp3'),
+            document.getElementById('cmp4')
+        ];
+
+        function toggleLights() {
+            indicators.forEach(indicator => {
+                indicator.classList.toggle('red');
+                indicator.classList.toggle('green');
+            });
+        }
+
+        setInterval(toggleLights, 1000); // Toggle every second
+    </script>
+</body>
+</html>

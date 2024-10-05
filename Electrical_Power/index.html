@@ -1,0 +1,78 @@
+<?php
+// Simulasi pembacaan KWh. Di sini Anda bisa mengganti logika sesuai kebutuhan.
+$meterReading = rand(0, 1000); // Membaca KWh secara acak
+?>
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Informasi KWh Meter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .info-box {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+        .header {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+        .content {
+            padding: 20px;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="info-box">
+        <div class="header">
+            <h2>Informasi KWh Meter</h2>
+        </div>
+        <div class="content">
+            <p id="meterReading">Membaca KWh: <span><?php echo $meterReading; ?></span> kWh</p>
+            <button id="refreshButton">Refresh</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('refreshButton').addEventListener('click', function() {
+            // Mengirim permintaan ke server untuk mendapatkan pembacaan KWh baru
+            fetch(window.location.href)
+                .then(response => response.text())
+                .then(data => {
+                    // Mengupdate tampilan dengan pembacaan baru
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(data, 'text/html');
+                    const newReading = doc.querySelector('#meterReading span').textContent;
+                    document.querySelector('#meterReading span').textContent = newReading;
+                });
+        });
+    </script>
+</body>
+</html>

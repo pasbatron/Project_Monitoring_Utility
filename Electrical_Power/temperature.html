@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Display</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .temperature-container {
+            display: flex;
+            flex-direction: column;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .temperature-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            color: #fff;
+            font-size: 1.5em;
+        }
+
+        .temperature-box:nth-child(1) {
+            background-color: #ff6f31;
+        }
+
+        .temperature-box:nth-child(2) {
+            background-color: #4caf50;
+        }
+
+        .temperature-value {
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+
+        .unit {
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="temperature-container">
+        <div class="temperature-box">
+            <div>外気 温度</div>
+            <div class="temperature-value" id="outside-temp">5.3<span class="unit">°C</span></div>
+        </div>
+        <div class="temperature-box">
+            <div>工場内温度</div>
+            <div class="temperature-value" id="inside-temp">15.2<span class="unit">°C</span></div>
+        </div>
+    </div>
+
+    <script>
+        // Example: Updating temperatures dynamically (values can be fetched from a server or sensor)
+        function updateTemperatures(outsideTemp, insideTemp) {
+            document.getElementById('outside-temp').innerHTML = outsideTemp + '<span class="unit">°C</span>';
+            document.getElementById('inside-temp').innerHTML = insideTemp + '<span class="unit">°C</span>';
+        }
+
+        // Simulate new temperature values after 3 seconds
+        setTimeout(() => {
+            updateTemperatures(7.2, 16.8);
+        }, 3000);
+    </script>
+
+</body>
+</html>

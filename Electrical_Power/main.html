@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            color: #333;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .branding {
+            font-size: 28px;
+            font-weight: bold;
+            color: blue;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .datetime {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .features {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .feature {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            color: black;
+            font-weight: bold;
+            font-size: 16px;
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 2px solid transparent;
+            transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .feature:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        .feature1 { border-color: red; }
+        .feature2 { border-color: yellow; }
+        .feature3 { border-color: purple; }
+        .feature4 { border-color: blue; }
+        .feature5 { border-color: orange; }
+
+        /* Box styling */
+        .box-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            margin-top: 20px;
+            padding: 20px;
+            max-width: 400px; /* Limit width for 2x2 layout */
+        }
+
+        .box {
+            background-color: #1e88e5;
+            border-radius: 15px;
+            padding: 10px; /* Reduced padding for smaller box */
+            width: 160px; /* Set a smaller width */
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 5px; /* Reduced margin */
+            flex: 1 1 160px; /* Allow responsiveness */
+        }
+        .box h1 {
+            font-size: 1rem; /* Adjusted font size */
+            color: white;
+            margin-bottom: 5px; /* Reduced margin */
+        }
+        .input-box {
+            background-color: #ffffff; /* White background */
+            border-radius: 10px;
+            padding: 5px; /* Reduced padding */
+            display: flex;
+            justify-content: center; /* Center the content */
+            align-items: center;
+            color: black; /* Change text color to black */
+            font-size: 1rem; /* Adjusted font size */
+        }
+        .input-box span {
+            padding: 5px; /* Added padding to span */
+        }
+
+        /* Temperature display styling */
+        .temperature-container {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .temperature-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            color: #fff;
+            font-size: 1.2em;
+            width: 240px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .temperature-box:nth-child(1) {
+            background-color: #ff6f31;
+        }
+
+        .temperature-box:nth-child(2) {
+            background-color: #4caf50;
+        }
+
+        .temperature-value {
+            font-size: 1.8em;
+            font-weight: bold;
+        }
+
+        .unit {
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar Section -->
+    <div class="navbar">
+        <div class="branding">OTICS INDONESIA</div>
+        <div class="datetime" id="datetime"></div>
+        <div class="features">
+            <div class="feature feature1" aria-label="Feature 1" onclick="featureClick(1)">トップ</div>
+            <div class="feature feature2" aria-label="Feature 2" onclick="featureClick(2)">一</div>
+            <div class="feature feature3" aria-label="Feature 3" onclick="featureClick(3)">二</div>
+            <div class="feature feature4" aria-label="Feature 4" onclick="featureClick(4)">三</div>
+            <div class="feature feature5" aria-label="Feature 5" onclick="featureClick(5)">四</div>
+        </div>
+    </div>
+
+    <!-- Box Section -->
+    <div class="box-container">
+        <div class="box">
+            <h1>電力 / Listrik (kWh)</h1>
+            <div class="input-box">
+                <span>1 kWh</span>
+            </div>
+        </div>
+        <div class="box">
+            <h1>水 / Air (m³)</h1>
+            <div class="input-box">
+                <span>5 m³</span>
+            </div>
+        </div>
+        <div class="box">
+            <h1>空気 / Udara (m³)</h1>
+            <div class="input-box">
+                <span>3 m³</span>
+            </div>
+        </div>
+        <div class="box">
+            <h1>ガス / Gas (m³)</h1>
+            <div class="input-box">
+                <span>4 m³</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Temperature Display Section -->
+    <div class="temperature-container">
+        <div class="temperature-box">
+            <div>外気 温度 / Outside Temperature</div>
+            <div class="temperature-value" id="outside-temp">5.3<span class="unit">°C</span></div>
+        </div>
+        <div class="temperature-box">
+            <div>工場内温度 / Inside Temperature</div>
+            <div class="temperature-value" id="inside-temp">15.2<span class="unit">°C</span></div>
+        </div>
+    </div>
+
+    <script>
+        // Update datetime every second
+        setInterval(() => {
+            document.getElementById('datetime').innerText = new Date().toLocaleString();
+        }, 1000);
+
+        // Handle feature button clicks
+        function featureClick(featureNumber) {
+            alert(`Feature ${featureNumber} clicked`);
+            // Here you can implement the actual feature functionality
+        }
+    </script>
+</body>
+</html>

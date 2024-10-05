@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emoji Slider</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            text-align: center;
+        }
+        .slider {
+            width: 100%;
+        }
+        .emoji {
+            font-size: 7rem; /* Increased size */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <input type="range" min="0" max="90" value="0" class="slider" id="emojiSlider">
+        <div id="emoji" class="emoji">😄</div>
+    </div>
+    <script>
+        const slider = document.getElementById('emojiSlider');
+        const emoji = document.getElementById('emoji');
+
+        slider.addEventListener('input', function() {
+            const value = slider.value;
+            if (value >= 0 && value <= 60) {
+                emoji.innerText = '😄';
+                emoji.style.color = 'green';
+            } else if (value > 60 && value <= 70) {
+                emoji.innerText = '😐';
+                emoji.style.color = 'yellow';
+            } else if (value > 70 && value <= 80) {
+                emoji.innerText = '😢';
+                emoji.style.color = 'red';
+            } else if (value > 80 && value <= 90) {
+                emoji.innerText = '😡';
+                emoji.style.color = 'purple';
+            }
+        });
+    </script>
+</body>
+</html>

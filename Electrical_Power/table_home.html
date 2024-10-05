@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Pemantauan Daya</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+        }
+
+        .dashboard-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        .power-table {
+            margin-right: 30px;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 300px;
+            text-align: center;
+            background-color: #001f3f;
+            color: white;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        thead {
+            background-color: #004080;
+        }
+
+        .progress-bar {
+            width: 100px;
+            background-color: #ddd;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 20px;
+            background-color: #32cd32;
+            width: 0;
+            transition: width 0.5s;
+        }
+
+        .status-indicator img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <div class="power-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Pemakaian Listrik</th>
+                        <th>Nilai Sekarang</th>
+                        <th>Persentase Target</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Daya Saat Ini</td>
+                        <td><span id="power-value">151</span> kW</td>
+                        <td><span id="power-percent">30.2</span> %</td>
+                    </tr>
+                    <tr>
+                        <td>Permintaan Sekarang</td>
+                        <td><span id="current-demand">71</span> kW</td>
+                        <td><span id="demand-percent">14.2</span> %</td>
+                    </tr>
+                    <tr>
+                        <td>Prediksi Permintaan</td>
+                        <td><span id="predicted-demand">213</span> kW</td>
+                        <td><span id="predicted-percent">42.6</span> %</td>
+                    </tr>
+                    <tr>
+                        <td>Target</td>
+                        <td><span id="target-value">500</span> kW</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress" id="progress-bar-fill"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="status-indicator">
+            <img src="smiley.png" alt="Status Indicator" id="status-image">
+        </div>
+    </div>
+
+    <script>
+        // Sample data update (this would be dynamic in a real app)
+        const powerValue = 151;
+        const targetValue = 500;
+
+        const powerPercent = (powerValue / targetValue) * 100;
+        document.getElementById("power-percent").textContent = powerPercent.toFixed(1);
+        document.getElementById("progress-bar-fill").style.width = powerPercent + '%';
+
+        // Change the status image based on the percentage
+        const statusImage = document.getElementById("status-image");
+        
+        if (powerPercent > 80) {
+            statusImage.src = "angry.png"; // Icon for >80%, use your own "angry" image
+        } else {
+            statusImage.src = "smiley.png"; // Icon for <=80%, use your own "smiley" image
+        }
+    </script>
+</body>
+</html>

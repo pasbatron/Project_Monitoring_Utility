@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabel Parameter Listrik</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(to bottom, #e0f7fa, #ffffff);
+        }
+        table {
+            width: 80%;
+            border-collapse: collapse;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            background-color: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            border: 1px solid #b2ebf2;
+            padding: 12px 16px;
+            text-align: center;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        th {
+            background: linear-gradient(to right, #007bb2, #00bcd4);
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+        th, td:hover {
+            background-color: #b2ebf2;
+        }
+        tr:nth-child(even) {
+            background-color: #f0f8ff;
+        }
+        tr:nth-child(odd) {
+            background-color: #ffffff;
+        }
+        @media (max-width: 768px) {
+            table {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <tr>
+            <th>Parameter</th>
+            <th>Unit</th>
+            <th>受電<br>Receiving Power</th>
+            <th>第1変台<br>Transformer 1</th>
+            <th>第2変台<br>Transformer 2</th>
+            <th>第3変台<br>Transformer 3</th>
+            <th>第4変台<br>Transformer 4</th>
+        </tr>
+        <tr>
+            <td>電圧<br>Voltage</td>
+            <td>[V]</td>
+            <td id="voltage1"></td>
+            <td id="voltage2"></td>
+            <td id="voltage3"></td>
+            <td id="voltage4"></td>
+            <td id="voltage5"></td>
+        </tr>
+        <tr>
+            <td>最大電圧<br>Max Voltage</td>
+            <td>[V]</td>
+            <td id="maxVoltage1"></td>
+            <td id="maxVoltage2"></td>
+            <td id="maxVoltage3"></td>
+            <td id="maxVoltage4"></td>
+            <td id="maxVoltage5"></td>
+        </tr>
+        <tr>
+            <td>電流<br>Current</td>
+            <td>[A]</td>
+            <td id="current1"></td>
+            <td id="current2"></td>
+            <td id="current3"></td>
+            <td id="current4"></td>
+            <td id="current5"></td>
+        </tr>
+        <tr>
+            <td>最大電流<br>Max Current</td>
+            <td>[A]</td>
+            <td id="maxCurrent1"></td>
+            <td id="maxCurrent2"></td>
+            <td id="maxCurrent3"></td>
+            <td id="maxCurrent4"></td>
+            <td id="maxCurrent5"></td>
+        </tr>
+        <tr>
+            <td>電力<br>Power</td>
+            <td>[kW]</td>
+            <td id="power1"></td>
+            <td id="power2"></td>
+            <td id="power3"></td>
+            <td id="power4"></td>
+            <td id="power5"></td>
+        </tr>
+        <tr>
+            <td>力率<br>Power Factor</td>
+            <td>[Φ]</td>
+            <td id="powerFactor1"></td>
+            <td id="powerFactor2"></td>
+            <td id="powerFactor3"></td>
+            <td id="powerFactor4"></td>
+            <td id="powerFactor5"></td>
+        </tr>
+        <tr>
+            <td>電力量(日)<br>Daily Energy</td>
+            <td>[kWh]</td>
+            <td id="dailyEnergy1"></td>
+            <td id="dailyEnergy2"></td>
+            <td id="dailyEnergy3"></td>
+            <td id="dailyEnergy4"></td>
+            <td id="dailyEnergy5"></td>
+        </tr>
+        <tr>
+            <td>電力量(月)<br>Monthly Energy</td>
+            <td>[MWh]</td>
+            <td id="monthlyEnergy1"></td>
+            <td id="monthlyEnergy2"></td>
+            <td id="monthlyEnergy3"></td>
+            <td id="monthlyEnergy4"></td>
+            <td id="monthlyEnergy5"></td>
+        </tr>
+    </table>
+    <script>
+        function getRandomValue(min, max) {
+            return (Math.random() * (max - min) + min).toFixed(2);
+        }
+
+        function updateTable() {
+            document.getElementById('voltage1').innerText = getRandomValue(6000, 6500);
+            document.getElementById('voltage2').innerText = getRandomValue(200, 220);
+            document.getElementById('voltage3').innerText = getRandomValue(6000, 6500);
+            document.getElementById('voltage4').innerText = getRandomValue(6000, 6500);
+            document.getElementById('voltage5').innerText = getRandomValue(6000, 6500);
+            
+            document.getElementById('maxVoltage1').innerText = getRandomValue(6450, 6550);
+            document.getElementById('maxVoltage2').innerText = getRandomValue(210, 230);
+            document.getElementById('maxVoltage3').innerText = getRandomValue(6450, 6550);
+            document.getElementById('maxVoltage4').innerText = getRandomValue(6450, 6550);
+            document.getElementById('maxVoltage5').innerText = getRandomValue(6450, 6550);
+
+            document.getElementById('current1').innerText = getRandomValue(10, 20);
+            document.getElementById('current2').innerText = getRandomValue(150, 200);
+            document.getElementById('current3').innerText = getRandomValue(10, 20);
+            document.getElementById('current4').innerText = getRandomValue(5, 15);
+            document.getElementById('current5').innerText = getRandomValue(5, 15);
+
+            document.getElementById('maxCurrent1').innerText = getRandomValue(15, 25);
+            document.getElementById('maxCurrent2').innerText = getRandomValue(180, 210);
+            document.getElementById('maxCurrent3').innerText = getRandomValue(15, 25);
+            document.getElementById('maxCurrent4').innerText = getRandomValue(5, 15);
+            document.getElementById('maxCurrent5').innerText = getRandomValue(5, 20);
+
+            document.getElementById('power1').innerText = getRandomValue(100, 200);
+            document.getElementById('power2').innerText = getRandomValue(40, 60);
+            document.getElementById('power3').innerText = getRandomValue(100, 200);
+            document.getElementById('power4').innerText = getRandomValue(0, 10);
+            document.getElementById('power5').innerText = getRandomValue(50, 70);
+
+            document.getElementById('powerFactor1').innerText = getRandomValue(-1, 1);
+            document.getElementById('powerFactor2').innerText = getRandomValue(-1, 1);
+            document.getElementById('powerFactor3').innerText = getRandomValue(-1, 1);
+            document.getElementById('powerFactor4').innerText = getRandomValue(-1, 1);
+            document.getElementById('powerFactor5').innerText = getRandomValue(-1, 1);
+
+            document.getElementById('dailyEnergy1').innerText = getRandomValue(500, 1500);
+            document.getElementById('dailyEnergy2').innerText = getRandomValue(200, 300);
+            document.getElementById('dailyEnergy3').innerText = getRandomValue(500, 1500);
+            document.getElementById('dailyEnergy4').innerText = getRandomValue(10, 50);
+            document.getElementById('dailyEnergy5').innerText = getRandomValue(300, 400);
+
+            document.getElementById('monthlyEnergy1').innerText = getRandomValue(10000, 30000);
+            document.getElementById('monthlyEnergy2').innerText = getRandomValue(5000, 10000);
+            document.getElementById('monthlyEnergy3').innerText = getRandomValue(10000, 30000);
+            document.getElementById('monthlyEnergy4').innerText = getRandomValue(100, 300);
+            document.getElementById('monthlyEnergy5').innerText = getRandomValue(5000, 8000);
+        }
+
+        setInterval(updateTable, 2000);
+    </script>
+</body>
+</html>

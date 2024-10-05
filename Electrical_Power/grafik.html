@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Real-Time Temperature Graph</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: linear-gradient(to bottom, #e0f7fa, #ffffff); /* Blue to white gradient background */
+        }
+        #chartContainer {
+            display: flex;
+            background-color: #ffffff; /* White chart area */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            padding: 20px;
+            width: 80%;
+            height: 60vh;
+        }
+        #temperatureChart {
+            flex: 2;
+            border-radius: 10px; /* Match the container */
+            background: #e0f7fa; /* Light blue background for the chart area */
+            padding: 10px; /* Padding inside the chart */
+        }
+        #infoContainer {
+            flex: 1;
+            margin-left: 20px;
+            color: #00796b; /* Dark teal color for text */
+        }
+        h3 {
+            border-bottom: 2px solid #00796b; /* Underline effect */
+            padding-bottom: 5px; /* Space under the title */
+        }
+        p {
+            margin: 5px 0; /* Margins for paragraph spacing */
+            font-size: 16px; /* Slightly larger font size */
+        }
+    </style>
+</head>
+<body>
+    <div id="chartContainer">
+        <canvas id="temperatureChart"></canvas>
+        <div id="infoContainer">
+            <h3>History</h3>
+            <p id="highest"></p>
+            <p id="lowest"></p>
+            <h3>Shifts</h3>
+            <p>Shift 1: 06:50 - 16:10</p>
+            <p>Shift 2: 19:50 - 06:50</p>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('temperatureChart').getContext('2d');
+        const temperatureChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [], // Initial empty labels
+                datasets: [
+                    {
+                        label: 'Temperature Trend 1',
+                        data: [],
+                        borderColor: '#00796b', // Dark teal for the first dataset
+                        fill: false
+                    },
+                    {
+                        label: 'Temperature Trend 2',
+                        data: [],
+                        borderColor: '#0288d1', // Lighter blue for the second dataset
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 40
+                    }
+                }
+            }
+        });
+
+        // Function to add new data points
+        function addData(chart, label, data1, data2) {
+            chart.data.labels.push(label);
+            chart.data.datasets[0].data.push(data1);
+            chart.data.datasets[1].data.push(data2);
+            chart.update();
+            updateHistory(data1, data2, label);
+        }
+
+        // Initialize highest and lowest values
+        let highest = { value: -Infinity, time: '' };
+        let lowest = { value: Infinity, time: '' };
+
+        // Function to update highest and lowest history
+        function updateHistory(data1, data2, label) {
+            if (data1 > highest.value) {
+                highest.value = data1;
+                highest.time = label;
+            }
+            if (data2 > highest.value) {
+                highest.value = data2;
+                highest.time = label;
+            }
+            if (data1 < lowest.value) {
+                lowest.value = data1;
+                lowest.time = label;
+            }
+            if (data2 < lowest.value) {
+                lowest.value = data2;
+                lowest.time = label;
+            }
+
+            document.getElementById('highest').innerText = `Highest: ${highest.value}°C at ${highest.time}`;
+            document.getElementById('lowest').innerText = `Lowest: ${lowest.value}°C at ${lowest.time}`;
+        }
+
+        // Simulate real-time data updates with shift intervals
+        function simulateData() {
+            const now = new Date();
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            let label = `${hours}:${minutes < 10 ? '0' : ''}${minutes}`;
+
+            const temp1 = Math.floor(Math.random() * 35);
+            const temp2 = Math.floor(Math.random() * 35);
+            addData(temperatureChart, label, temp1, temp2);
+        }
+
+        setInterval(simulateData, 2000); // Update every 2 seconds
+    </script>
+</body>
+</html>

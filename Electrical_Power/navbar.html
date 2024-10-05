@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar dengan Box Sama seperti Water Meter</title>
+    <style>
+        /* General body styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        /* Navbar styling */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px; /* Reduced padding */
+            color: #333;
+            position: relative;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        .branding {
+            font-size: 28px; /* Smaller font size */
+            font-weight: bold;
+            color: blue;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        .datetime {
+            position: absolute;
+            top: 10px; /* Adjusted position */
+            right: 20px; /* Adjusted position */
+            font-size: 18px; /* Smaller font size */
+            font-weight: bold;
+        }
+        .features {
+            display: flex;
+            gap: 10px; /* Reduced gap between features */
+            margin-top: 20px; /* Reduced margin */
+        }
+        .feature {
+            width: 50px; /* Smaller width */
+            height: 50px; /* Smaller height */
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            color: black;
+            font-weight: bold;
+            font-size: 16px; /* Smaller font size */
+            background-color: rgba(255, 255, 255, 0.8);
+            border: 2px solid transparent; /* Thinner border */
+            transition: transform 0.3s, box-shadow 0.3s, border 0.3s;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        .feature:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+        .feature1 { border-color: red; }
+        .feature2 { border-color: yellow; }
+        .feature3 { border-color: purple; }
+        .feature4 { border-color: blue; }
+        .feature5 { border-color: orange; }
+
+        /* Box styling, similar to Water Meter */
+        .box-container {
+            display: flex; /* Menggunakan flexbox */
+            flex-wrap: wrap; /* Mengizinkan wrapping */
+            justify-content: flex-start; /* Memposisikan semua ke kiri */
+            margin-top: 20px; /* Mengurangi margin atas */
+            padding: 20px;
+        }
+
+        .box {
+            background-color: #1e88e5;
+            border-radius: 15px;
+            padding: 15px; /* Mengurangi padding */
+            width: 180px; /* Lebar box yang lebih kecil */
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 10px; /* Margin antara box */
+        }
+        .box h1 {
+            font-size: 1.25rem; /* Smaller font size */
+            color: white;
+            margin-bottom: 10px;
+        }
+        .input-box {
+            background-color: #0d47a1;
+            border-radius: 10px;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem; /* Smaller font size */
+        }
+        .input-box input {
+            background-color: transparent;
+            border: none;
+            color: white;
+            font-size: 1.5rem; /* Smaller font size */
+            width: 80px; /* Adjusted width */
+            text-align: right;
+        }
+        .input-box input:focus {
+            outline: none;
+        }
+        .input-box span {
+            font-size: 1.2rem; /* Smaller font size */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar Section -->
+    <div class="navbar">
+        <div class="branding">OTICS INDONESIA</div>
+        <div class="datetime" id="datetime"></div>
+        <div class="features">
+            <div class="feature feature1" onclick="featureClick(1)">トップ</div>
+            <div class="feature feature2" onclick="featureClick(2)">一</div>
+            <div class="feature feature3" onclick="featureClick(3)">二</div>
+            <div class="feature feature4" onclick="featureClick(4)">三</div>
+            <div class="feature feature5" onclick="featureClick(5)">四</div>
+        </div>
+    </div>
+
+    <!-- Box Section with Design Similar to Water Meter -->
+    <div class="box-container">
+        <div class="box">
+            <h1>市水</h1>
+            <div class="input-box">
+                <input type="number" id="waterAmount" value="1" min="0">
+                <span>m³</span>
+            </div>
+        </div>
+        <div class="box">
+            <h1>湯水</h1>
+            <div class="input-box">
+                <input type="number" id="waterAmount2" value="5" min="0">
+                <span>m³</span>
+            </div>
+        </div>
+        <div class="box">
+            <h1>冷水</h1>
+            <div class="input-box">
+                <input type="number" id="waterAmount3" value="3" min="0">
+                <span>m³</span>
+            </div>
+        </div>
+        <div class="box">
+            <h1>温水</h1>
+            <div class="input-box">
+                <input type="number" id="waterAmount4" value="4" min="0">
+                <span>m³</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Example JS functionality to handle the input value
+        const waterInput = document.getElementById('waterAmount');
+        const waterInput2 = document.getElementById('waterAmount2');
+        const waterInput3 = document.getElementById('waterAmount3');
+        const waterInput4 = document.getElementById('waterAmount4');
+
+        function validateInput(input) {
+            input.addEventListener('input', function() {
+                let value = parseFloat(input.value);
+                if (isNaN(value) || value < 0) {
+                    input.value = 0;
+                }
+            });
+        }
+
+        validateInput(waterInput);
+        validateInput(waterInput2);
+        validateInput(waterInput3);
+        validateInput(waterInput4);
+
+        function featureClick(feature) {
+            alert("Anda mengklik fitur " + feature);
+        }
+
+        function updateDateTime() {
+            const now = new Date();
+            const datetimeString = now.toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo' });
+            document.getElementById('datetime').innerText = datetimeString;
+        }
+
+        setInterval(updateDateTime, 1000);
+        updateDateTime();
+    </script>
+
+</body>
+</html>
